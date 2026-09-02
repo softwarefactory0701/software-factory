@@ -1,5 +1,11 @@
 # Consultorio — NEXUS Consultorios
 
+## NEXUS v1 — Gestión Administrativa
+
+NEXUS v1 organiza administrativamente un consultorio sin implementar información clínica sensible. Su alcance actual es una **demo comercial** destinada a validar interés y presentar la experiencia antes de construir un producto de producción para un cliente real.
+
+Los módulos actuales son Dashboard, Agenda, Consultas, Pacientes, Profesionales, Servicios, Reportes y Configuración.
+
 ## Propósito y target
 
 NEXUS es una demo administrativa para consultorios particulares, nutrición, fisioterapia, psicología, odontología, medicina general y pequeños centros profesionales. Busca mostrar cómo organizar recepción, agenda, asistencia y relación administrativa con pacientes.
@@ -42,9 +48,9 @@ Los teléfonos usan numeración ficticia y los emails el dominio reservado `exam
 
 ## Booking Core
 
-NEXUS reutiliza sin cambios contratos, escenario, escala horaria, columnas, booking cards, toolbar, selección, drawer, estado en memoria, creación simulada y Reset demo.
+NEXUS reutiliza contratos, escenario, escala horaria, columnas, booking cards, toolbar, selección, drawer, estado en memoria, creación simulada y Reset demo.
 
-El vertical aporta terminología, presentación de estados, tema, avatares, labels, notas administrativas y escenario. No fue necesario añadir metadata visual ni modificar el Core.
+El vertical aporta terminología, presentación de estados, tema, avatares, labels, notas administrativas y escenario. Booking Core incorporó únicamente la opción neutral y opt-in `showStatusOnCompactBookings`, utilizada para que NEXUS pueda mostrar el estado en turnos cortos sin alterar Beauty ni Taller.
 
 Los estados se adaptan de esta forma:
 
@@ -68,9 +74,17 @@ Existe un test automatizado que protege parte de este límite revisando término
 
 Todos los nombres, contactos, turnos, importes, métricas, búsquedas, filtros y acciones son ficticios. Las interacciones viven en memoria y no persisten.
 
+## Estado actual del producto
+
+NEXUS v1 es una **demo comercial**. No es un sistema médico productivo y existe únicamente para validar interés comercial y presentar una experiencia posible.
+
+No contiene backend, base de datos real, autenticación, persistencia, historia clínica, diagnósticos, recetas, expedientes ni integraciones médicas.
+
 ## Producción futura
 
 Después de una venta podrían evaluarse agenda real, permisos, recordatorios, confirmaciones, cobros, facturación e integraciones. Las capacidades clínicas o sanitarias requerirían un producto independiente, requisitos regulatorios, seguridad y diseño específico; no son una evolución automática de esta demo.
+
+La evolución conceptual se conserva en [consultorio-roadmap.md](./consultorio-roadmap.md). La estrategia de venta y escalera comercial se documentan en [consultorio-commercial.md](../03-sales/consultorio-commercial.md).
 
 ## Aprendizajes de reutilización
 
