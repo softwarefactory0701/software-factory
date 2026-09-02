@@ -12,6 +12,7 @@ import {
 
 export interface BookingDayScheduleProps {
   readonly bookings: readonly Booking[];
+  readonly showStatusOnCompactBookings?: boolean;
   readonly onSelectBooking: (bookingId: string) => void;
   readonly resourceNameInBooking?: (resourceName: string) => string;
   readonly renderCustomerAvatar?: (customer: Customer) => ReactNode;
@@ -29,6 +30,7 @@ function DefaultAvatar({ name }: { readonly name: string }) {
 
 export function BookingDaySchedule({
   bookings,
+  showStatusOnCompactBookings = false,
   onSelectBooking,
   resourceNameInBooking = (resourceName) => resourceName,
   renderCustomerAvatar,
@@ -85,7 +87,7 @@ export function BookingDaySchedule({
                       <p className="mt-1 truncate text-xs font-semibold text-stone-800">{detail.customer.name}</p>
                       <p className="truncate text-[10px] text-stone-500">{detail.service.name}</p>
                       {renderBookingMetadata ? <div className="mt-1 truncate text-[9px] text-stone-400">{renderBookingMetadata(detail)}</div> : null}
-                      {duration >= 2.5 ? <StatusBadge className="mt-2" tone={presentation.tone}>{presentation.label}</StatusBadge> : null}
+                      {duration >= 2.5 || showStatusOnCompactBookings ? <StatusBadge className="mt-2" tone={presentation.tone}>{presentation.label}</StatusBadge> : null}
                     </button>
                   );
                 })}
