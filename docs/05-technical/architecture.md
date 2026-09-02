@@ -127,3 +127,14 @@ Los datos Beauty adaptan sus entidades a `BookingScenario` desde `mock-data/beau
 El estado se mantiene en memoria mediante reducer. Su snapshot inicial permite `Reset demo` sin almacenamiento local ni infraestructura. Las mutaciones son de presentación y no expresan reglas de dominio productivas.
 
 La vista diaria y el drawer se comparten. Beauty conserva la vista semanal, el modal comercial de creación, labels, metadata enriquecida y presentación de estados. Esta frontera deberá validarse con un segundo vertical antes de extraer más composición.
+
+## Validación con Taller — SF-002
+
+Taller es el segundo consumidor de Booking Core. La validación introdujo dos extensiones pequeñas y opcionales:
+
+- Demo Shell recibe contexto, etiqueta de producto, iniciales y tonos de acento para no asumir una marca concreta. Sus valores por defecto preservan Beauty.
+- `BookingDaySchedule` acepta `renderBookingMetadata`, un slot neutral para información contextual del vertical.
+
+Los modelos `Vehicle`, `WorkOrder`, `WorkOrderStatus` y `ServiceHistory` permanecen en `@software-factory/mock-data/taller`. No existe una dependencia desde Booking Core hacia Taller.
+
+La dirección de dependencias se mantiene: Taller app consume Demo Shell, UI, Booking Core, configuración vertical y mock data; mock data consume contratos de Booking Core; Booking Core consume UI.

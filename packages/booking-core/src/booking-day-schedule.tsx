@@ -1,6 +1,6 @@
 import { StatusBadge } from "@software-factory/ui";
 import type { ReactNode } from "react";
-import type { Booking, BookingScenario, Customer, Resource } from "./types";
+import type { Booking, BookingDetail, BookingScenario, Customer, Resource } from "./types";
 import type { BookingStatusMap } from "./presentation";
 import {
   bookingTime,
@@ -15,6 +15,7 @@ export interface BookingDayScheduleProps {
   readonly onSelectBooking: (bookingId: string) => void;
   readonly resourceNameInBooking?: (resourceName: string) => string;
   readonly renderCustomerAvatar?: (customer: Customer) => ReactNode;
+  readonly renderBookingMetadata?: (detail: BookingDetail) => ReactNode;
   readonly renderResourceAvatar?: (resource: Resource) => ReactNode;
   readonly scenario: BookingScenario;
   readonly selectLabel: (customerName: string) => string;
@@ -31,6 +32,7 @@ export function BookingDaySchedule({
   onSelectBooking,
   resourceNameInBooking = (resourceName) => resourceName,
   renderCustomerAvatar,
+  renderBookingMetadata,
   renderResourceAvatar,
   scenario,
   selectLabel,
@@ -82,6 +84,7 @@ export function BookingDaySchedule({
                       <p className="text-[10px] font-bold text-stone-500">{startTime}—{endTime}</p>
                       <p className="mt-1 truncate text-xs font-semibold text-stone-800">{detail.customer.name}</p>
                       <p className="truncate text-[10px] text-stone-500">{detail.service.name}</p>
+                      {renderBookingMetadata ? <div className="mt-1 truncate text-[9px] text-stone-400">{renderBookingMetadata(detail)}</div> : null}
                       {duration >= 2.5 ? <StatusBadge className="mt-2" tone={presentation.tone}>{presentation.label}</StatusBadge> : null}
                     </button>
                   );
@@ -102,7 +105,7 @@ export function BookingDaySchedule({
               <div className="flex items-start gap-3">
                 <div className="w-12 shrink-0"><p className="font-display text-lg font-semibold">{bookingTime(booking.start)}</p><p className="text-[10px] text-stone-400">{bookingTime(booking.end)}</p></div>
                 {renderCustomerAvatar?.(detail.customer) ?? <DefaultAvatar name={detail.customer.name} />}
-                <div className="min-w-0 flex-1"><p className="truncate text-sm font-semibold text-stone-800">{detail.customer.name}</p><p className="truncate text-xs text-stone-500">{detail.service.name}</p><p className="mt-1 text-[10px] text-stone-400">{resourceNameInBooking(detail.resource.name)}</p><StatusBadge className="mt-2" tone={presentation.tone}>{presentation.label}</StatusBadge></div>
+                <div className="min-w-0 flex-1"><p className="truncate text-sm font-semibold text-stone-800">{detail.customer.name}</p><p className="truncate text-xs text-stone-500">{detail.service.name}</p>{renderBookingMetadata ? <div className="mt-1 truncate text-[10px] font-medium text-stone-500">{renderBookingMetadata(detail)}</div> : null}<p className="mt-1 text-[10px] text-stone-400">{resourceNameInBooking(detail.resource.name)}</p><StatusBadge className="mt-2" tone={presentation.tone}>{presentation.label}</StatusBadge></div>
               </div>
             </button>
           );

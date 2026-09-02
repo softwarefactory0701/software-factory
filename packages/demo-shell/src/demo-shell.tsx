@@ -9,8 +9,15 @@ export interface DemoNavigationItem {
 
 export interface DemoShellTheme {
   readonly accent: string;
+  readonly accentSoft?: string;
+  readonly accentText?: string;
+  readonly badgeBackground?: string;
+  readonly badgeText?: string;
+  readonly brandMarkColor?: string;
   readonly background: string;
   readonly foreground: string;
+  readonly navigationDot?: string;
+  readonly navigationIcon?: string;
   readonly sidebar: string;
   readonly surface: string;
 }
@@ -19,6 +26,7 @@ export interface DemoShellProps {
   readonly brandMark?: string;
   readonly businessName: string;
   readonly children: ReactNode;
+  readonly contextLabel?: string;
   readonly currentPath?: string;
   readonly demoLabel?: string;
   readonly footerText?: string;
@@ -28,6 +36,8 @@ export interface DemoShellProps {
   readonly mobileOverflowNavigation?: readonly DemoNavigationItem[];
   readonly navigation: readonly DemoNavigationItem[];
   readonly pageTitle: string;
+  readonly productLabel?: string;
+  readonly profileInitials?: string;
   readonly profileLabel?: string;
   readonly theme?: DemoShellTheme;
 }
@@ -44,6 +54,7 @@ export function DemoShell({
   brandMark,
   businessName,
   children,
+  contextLabel = "AURA",
   currentPath,
   demoLabel = "DEMO",
   footerText = "Demo by Software Factory",
@@ -53,13 +64,22 @@ export function DemoShell({
   mobileOverflowNavigation = [],
   navigation,
   pageTitle,
+  productLabel = "Beauty management",
+  profileInitials = "AV",
   profileLabel = "Perfil de muestra",
   theme = defaultTheme,
 }: DemoShellProps) {
   const style = {
     "--demo-accent": theme.accent,
+    "--demo-accent-soft": theme.accentSoft ?? "#f4e9e4",
+    "--demo-accent-text": theme.accentText ?? "#7c5558",
+    "--demo-badge-background": theme.badgeBackground ?? "#ead8ce",
+    "--demo-badge-text": theme.badgeText ?? "#4b3636",
+    "--demo-brand-mark": theme.brandMarkColor ?? "#ead8ce",
     "--demo-background": theme.background,
     "--demo-foreground": theme.foreground,
+    "--demo-navigation-dot": theme.navigationDot ?? "#d9a8a5",
+    "--demo-navigation-icon": theme.navigationIcon ?? "#e7c7c4",
     "--demo-sidebar": theme.sidebar,
     "--demo-surface": theme.surface,
   } as CSSProperties;
@@ -70,12 +90,12 @@ export function DemoShell({
     <div className="min-h-screen overflow-x-hidden bg-[var(--demo-background)] text-[var(--demo-foreground)]" style={style}>
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 flex-col bg-[var(--demo-sidebar)] px-4 py-6 text-white lg:flex">
         <div className="flex items-center gap-3 px-2">
-          <span className="grid size-10 shrink-0 place-items-center rounded-full border border-white/20 font-display text-lg text-[#ead8ce]">
+          <span className="grid size-10 shrink-0 place-items-center rounded-full border border-white/20 font-display text-lg text-[var(--demo-brand-mark)]">
             {brandMark ?? businessName.slice(0, 1)}
           </span>
           <div className="min-w-0">
             <p className="truncate font-display text-base font-semibold tracking-wide">{businessName}</p>
-            <p className="text-[10px] uppercase tracking-[0.22em] text-white/45">Beauty management</p>
+            <p className="text-[10px] uppercase tracking-[0.22em] text-white/45">{productLabel}</p>
           </div>
         </div>
 
@@ -91,9 +111,9 @@ export function DemoShell({
                 href={item.href}
                 key={item.href}
               >
-                <span className={active ? "text-[#e7c7c4]" : "text-white/45 group-hover:text-white/75"}>{item.icon}</span>
+                <span className={active ? "text-[var(--demo-navigation-icon)]" : "text-white/45 group-hover:text-white/75"}>{item.icon}</span>
                 {item.label}
-                {active ? <span className="ml-auto size-1.5 rounded-full bg-[#d9a8a5]" /> : null}
+                {active ? <span className="ml-auto size-1.5 rounded-full bg-[var(--demo-navigation-dot)]" /> : null}
               </a>
             );
           })}
@@ -101,7 +121,7 @@ export function DemoShell({
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-3.5">
           <div className="flex items-center justify-between gap-3">
-            <Badge className="bg-[#ead8ce] text-[#4b3636]">{demoLabel}</Badge>
+            <Badge className="bg-[var(--demo-badge-background)] text-[var(--demo-badge-text)]">{demoLabel}</Badge>
             <span className="size-2 rounded-full bg-emerald-300 shadow-[0_0_0_4px_rgba(110,231,183,0.1)]" />
           </div>
           <p className="mt-3 text-[11px] leading-5 text-white/45">Entorno de demostración</p>
@@ -117,15 +137,15 @@ export function DemoShell({
                 {brandMark ?? businessName.slice(0, 1)}
               </span>
               <div className="min-w-0">
-                <p className="truncate text-[11px] font-medium text-stone-400">AURA / {pageTitle}</p>
+                <p className="truncate text-[11px] font-medium text-stone-400">{contextLabel} / {pageTitle}</p>
                 <h1 className="truncate font-display text-xl font-semibold tracking-tight text-stone-900 sm:text-2xl">{pageTitle}</h1>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Badge className="bg-[#ead8ce] text-[#4b3636] lg:hidden">{demoLabel}</Badge>
+              <Badge className="bg-[var(--demo-badge-background)] text-[var(--demo-badge-text)] lg:hidden">{demoLabel}</Badge>
               <div className="hidden items-center gap-3 rounded-full border border-stone-200 bg-[var(--demo-surface)] py-1.5 pl-3 pr-1.5 sm:flex">
                 <span className="text-xs font-medium text-stone-600">{profileLabel}</span>
-                <span className="grid size-8 place-items-center rounded-full bg-[#ead8ce] text-xs font-bold text-[#594142]">AV</span>
+                <span className="grid size-8 place-items-center rounded-full bg-[var(--demo-badge-background)] text-xs font-bold text-[var(--demo-badge-text)]">{profileInitials}</span>
               </div>
             </div>
           </div>
@@ -139,7 +159,7 @@ export function DemoShell({
             return (
               <a
                 aria-current={active ? "page" : undefined}
-                className={`flex min-w-0 flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-semibold transition ${active ? "bg-[#f4e9e4] text-[#7c5558]" : "text-stone-400"}`}
+                className={`flex min-w-0 flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-semibold transition ${active ? "bg-[var(--demo-accent-soft)] text-[var(--demo-accent-text)]" : "text-stone-400"}`}
                 href={item.href}
                 key={item.href}
               >
@@ -150,7 +170,7 @@ export function DemoShell({
           })}
           {mobileOverflowNavigation.length > 0 ? (
             <details className="group relative min-w-0">
-              <summary className={`flex cursor-pointer list-none flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-semibold transition [&::-webkit-details-marker]:hidden ${mobileOverflowActive ? "bg-[#f4e9e4] text-[#7c5558]" : "text-stone-400"}`}>
+              <summary className={`flex cursor-pointer list-none flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[10px] font-semibold transition [&::-webkit-details-marker]:hidden ${mobileOverflowActive ? "bg-[var(--demo-accent-soft)] text-[var(--demo-accent-text)]" : "text-stone-400"}`}>
                 <span>{mobileOverflowIcon}</span>
                 {mobileOverflowLabel}
               </summary>
@@ -158,7 +178,7 @@ export function DemoShell({
                 <p className="px-3 pb-2 pt-1 text-[10px] font-semibold uppercase tracking-[.16em] text-stone-400">Más opciones</p>
                 {mobileOverflowNavigation.map((item) => {
                   const active = item.href === currentPath;
-                  return <a aria-current={active ? "page" : undefined} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold ${active ? "bg-[#f4e9e4] text-[#7c5558]" : "text-stone-600"}`} href={item.href} key={item.href}><span>{item.icon}</span>{item.label}</a>;
+                  return <a aria-current={active ? "page" : undefined} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold ${active ? "bg-[var(--demo-accent-soft)] text-[var(--demo-accent-text)]" : "text-stone-600"}`} href={item.href} key={item.href}><span>{item.icon}</span>{item.label}</a>;
                 })}
                 <div className="mx-3 my-2 h-px bg-stone-100" />
                 <p className="px-3 py-1 text-[10px] text-stone-400">Demo by Software Factory</p>

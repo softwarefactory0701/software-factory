@@ -5,17 +5,21 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./beauty": "./beauty/index.ts"
+    "./beauty": "./beauty/index.ts",
+    "./taller": "./taller/index.ts"
   },
   "scripts": {
     "build": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0",
+    "test": "tsx --test taller/taller.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@software-factory/booking-core": "workspace:*"
   },
   "devDependencies": {
+    "@types/node": "^24.10.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }

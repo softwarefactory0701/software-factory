@@ -25,3 +25,62 @@ select,
 textarea {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Vertical-only adapter: vehicle leads the information hierarchy in Taller bookings. */
+.taller-agenda button:has(> div > .taller-booking-primary) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.taller-agenda button:has(> div > .taller-booking-primary) > p:first-of-type {
+  order: 0;
+}
+
+.taller-agenda button:has(> div > .taller-booking-primary) > div:has(> .taller-booking-primary) {
+  order: 1;
+  margin-top: 0.25rem;
+  max-width: 100%;
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1rem;
+  color: #202321;
+}
+
+.taller-agenda button:has(> div > .taller-booking-primary) > p:nth-of-type(2) {
+  order: 2;
+  margin-top: 0.125rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #78716c;
+}
+
+.taller-agenda button:has(> div > .taller-booking-primary) > p:nth-of-type(3) {
+  order: 3;
+  font-size: 0.625rem;
+}
+
+.taller-agenda button:has(> div > .taller-booking-primary) > span {
+  order: 4;
+}
+
+.taller-agenda div:has(> div > .taller-booking-primary) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.taller-agenda div:has(> div > .taller-booking-primary) > div:has(> .taller-booking-primary) {
+  order: 0;
+  margin-top: 0;
+  max-width: 100%;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  line-height: 1.1rem;
+  color: #202321;
+}
+
+.taller-agenda div:has(> div > .taller-booking-primary) > p:first-of-type { order: 1; }
+.taller-agenda div:has(> div > .taller-booking-primary) > p:nth-of-type(2) { order: 2; }
+.taller-agenda div:has(> div > .taller-booking-primary) > p:nth-of-type(3) { order: 3; }
+.taller-agenda div:has(> div > .taller-booking-primary) > span { order: 4; }
