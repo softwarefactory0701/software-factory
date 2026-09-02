@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@source "../../../packages/ui/src";
+@source "../../../packages/demo-shell/src";
+@source "../../../packages/verticals";
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}

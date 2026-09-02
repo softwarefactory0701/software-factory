@@ -1,0 +1,23 @@
+{
+  "name": "software-factory",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:demos": "pnpm --filter @software-factory/demos dev",
+    "dev:website": "pnpm --filter @software-factory/website dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.3.4",
+    "turbo": "2.10.12",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@software-factory/booking-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "lint": "eslint src --max-warnings=0",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "react": "19.2.8",
+    "typescript": "^5.9.3"
+  }
+}

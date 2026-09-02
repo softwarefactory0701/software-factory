@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@source "../../../packages/ui/src";
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  font-family: Arial, Helvetica, sans-serif;
+}
