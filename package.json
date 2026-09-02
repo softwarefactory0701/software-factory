@@ -12,6 +12,7 @@
     "dev:demos": "pnpm --filter @software-factory/demos dev",
     "dev:website": "pnpm --filter @software-factory/website dev",
     "lint": "turbo run lint",
+    "test": "turbo run test",
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {

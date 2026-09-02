@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../../../packages/booking-core/src";
 @source "../../../packages/ui/src";
 @source "../../../packages/demo-shell/src";
 @source "../../../packages/verticals";

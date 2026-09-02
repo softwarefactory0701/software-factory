@@ -3,6 +3,7 @@ import {
   beautyDashboard,
   beautyProfessionals,
 } from "@software-factory/mock-data/beauty";
+import { bookingTime } from "@software-factory/booking-core";
 import { ProgressBar, SectionHeader, StatCard, StatusBadge } from "@software-factory/ui";
 import { BeautyIcon, type BeautyIconName } from "../_components/beauty-icon";
 import { BeautyAvatar, BeautyPageIntro, BeautyPanel } from "../_components/beauty-primitives";
@@ -17,7 +18,7 @@ const statusLabels = {
   cancelled: "Cancelado",
   completed: "Finalizado",
   confirmed: "Confirmado",
-  "in-service": "En servicio",
+  in_progress: "En servicio",
   pending: "Pendiente",
 } as const;
 
@@ -25,7 +26,7 @@ const statusTones = {
   cancelled: "danger",
   completed: "neutral",
   confirmed: "success",
-  "in-service": "info",
+  in_progress: "info",
   pending: "warning",
 } as const;
 
@@ -92,15 +93,15 @@ export default function BeautyDashboardPage() {
           </div>
           <div className="divide-y divide-stone-100">
             {upcomingAppointments.map((appointment) => {
-              const client = getBeautyClient(appointment.clientId);
-              const professional = getBeautyProfessional(appointment.professionalId);
+              const client = getBeautyClient(appointment.customerId);
+              const professional = getBeautyProfessional(appointment.resourceId);
               const service = getBeautyService(appointment.serviceId);
               if (!client || !professional || !service) return null;
 
               return (
                 <div className="grid grid-cols-[3.5rem_1fr] gap-3 p-4 transition hover:bg-[#fbf7f2] sm:grid-cols-[4rem_1fr_auto] sm:items-center sm:px-6" key={appointment.id}>
                   <div>
-                    <p className="font-display text-lg font-semibold text-stone-900">{appointment.startTime}</p>
+                    <p className="font-display text-lg font-semibold text-stone-900">{bookingTime(appointment.start)}</p>
                     <p className="text-[10px] text-stone-400">{service.durationMinutes} min</p>
                   </div>
                   <div className="flex min-w-0 items-center gap-3">

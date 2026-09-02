@@ -1,4 +1,5 @@
-import type { BookingStatus } from "@software-factory/booking-core";
+import { defineBookingScenario } from "@software-factory/booking-core/scenario";
+import type { Booking } from "@software-factory/booking-core/types";
 import { defineMockScenario } from "../src/index";
 
 export interface BeautyProfessional {
@@ -36,17 +37,7 @@ export interface BeautyClient {
   readonly visits: number;
 }
 
-export interface BeautyAppointment {
-  readonly clientId: string;
-  readonly endTime: string;
-  readonly id: string;
-  readonly professionalId: string;
-  readonly serviceId: string;
-  readonly slotSpan: number;
-  readonly startSlot: number;
-  readonly startTime: string;
-  readonly status: BookingStatus;
-}
+export type BeautyAppointment = Booking;
 
 export const beautyProfessionals = [
   {
@@ -102,21 +93,36 @@ export const beautyClients = [
 ] as const satisfies readonly BeautyClient[];
 
 export const beautyAppointments = [
-  { clientId: "paula-benitez", endTime: "10:00", id: "turno-10", professionalId: "martina-lopez", serviceId: "corte-brushing", slotSpan: 2, startSlot: 0, startTime: "09:00", status: "completed" },
-  { clientId: "sofia-martinez", endTime: "12:00", id: "turno-01", professionalId: "martina-lopez", serviceId: "balayage-premium", slotSpan: 4, startSlot: 2, startTime: "10:00", status: "in-service" },
-  { clientId: "ana-torres", endTime: "14:00", id: "turno-02", professionalId: "martina-lopez", serviceId: "corte-brushing", slotSpan: 2, startSlot: 8, startTime: "13:00", status: "confirmed" },
-  { clientId: "valentina-diaz", endTime: "15:30", id: "turno-11", professionalId: "martina-lopez", serviceId: "corte-brushing", slotSpan: 2, startSlot: 11, startTime: "14:30", status: "confirmed" },
-  { clientId: "paula-benitez", endTime: "17:30", id: "turno-03", professionalId: "martina-lopez", serviceId: "color-completo", slotSpan: 3, startSlot: 14, startTime: "16:00", status: "pending" },
-  { clientId: "lucia-mendez", endTime: "10:15", id: "turno-04", professionalId: "julieta-ramos", serviceId: "kapping", slotSpan: 2.5, startSlot: 0, startTime: "09:00", status: "completed" },
-  { clientId: "camila-ruiz", endTime: "12:30", id: "turno-05", professionalId: "julieta-ramos", serviceId: "manicure-semi", slotSpan: 2, startSlot: 5, startTime: "11:30", status: "confirmed" },
-  { clientId: "ana-torres", endTime: "14:30", id: "turno-12", professionalId: "julieta-ramos", serviceId: "manicure-semi", slotSpan: 2, startSlot: 9, startTime: "13:30", status: "pending" },
-  { clientId: "lucia-mendez", endTime: "16:15", id: "turno-13", professionalId: "julieta-ramos", serviceId: "kapping", slotSpan: 2.5, startSlot: 12, startTime: "15:00", status: "confirmed" },
-  { clientId: "juliana-ferreyra", endTime: "18:00", id: "turno-06", professionalId: "julieta-ramos", serviceId: "nail-art", slotSpan: 2, startSlot: 16, startTime: "17:00", status: "confirmed" },
-  { clientId: "camila-ruiz", endTime: "10:30", id: "turno-14", professionalId: "agustina-perez", serviceId: "corte-brushing", slotSpan: 2, startSlot: 1, startTime: "09:30", status: "completed" },
-  { clientId: "emilia-rojas", endTime: "13:30", id: "turno-07", professionalId: "agustina-perez", serviceId: "color-completo", slotSpan: 3, startSlot: 6, startTime: "12:00", status: "in-service" },
-  { clientId: "valentina-diaz", endTime: "17:00", id: "turno-08", professionalId: "agustina-perez", serviceId: "color-completo", slotSpan: 3, startSlot: 13, startTime: "15:30", status: "confirmed" },
-  { clientId: "sofia-martinez", endTime: "19:00", id: "turno-09", professionalId: "agustina-perez", serviceId: "corte-brushing", slotSpan: 2, startSlot: 18, startTime: "18:00", status: "cancelled" },
+  { customerId: "paula-benitez", end: "2026-09-08T10:00:00", id: "turno-10", resourceId: "martina-lopez", serviceId: "corte-brushing", start: "2026-09-08T09:00:00", status: "completed" },
+  { customerId: "sofia-martinez", end: "2026-09-08T12:00:00", id: "turno-01", resourceId: "martina-lopez", serviceId: "balayage-premium", start: "2026-09-08T10:00:00", status: "in_progress" },
+  { customerId: "ana-torres", end: "2026-09-08T14:00:00", id: "turno-02", resourceId: "martina-lopez", serviceId: "corte-brushing", start: "2026-09-08T13:00:00", status: "confirmed" },
+  { customerId: "valentina-diaz", end: "2026-09-08T15:30:00", id: "turno-11", resourceId: "martina-lopez", serviceId: "corte-brushing", start: "2026-09-08T14:30:00", status: "confirmed" },
+  { customerId: "paula-benitez", end: "2026-09-08T17:30:00", id: "turno-03", resourceId: "martina-lopez", serviceId: "color-completo", start: "2026-09-08T16:00:00", status: "pending" },
+  { customerId: "lucia-mendez", end: "2026-09-08T10:15:00", id: "turno-04", resourceId: "julieta-ramos", serviceId: "kapping", start: "2026-09-08T09:00:00", status: "completed" },
+  { customerId: "camila-ruiz", end: "2026-09-08T12:30:00", id: "turno-05", resourceId: "julieta-ramos", serviceId: "manicure-semi", start: "2026-09-08T11:30:00", status: "confirmed" },
+  { customerId: "ana-torres", end: "2026-09-08T14:30:00", id: "turno-12", resourceId: "julieta-ramos", serviceId: "manicure-semi", start: "2026-09-08T13:30:00", status: "pending" },
+  { customerId: "lucia-mendez", end: "2026-09-08T16:15:00", id: "turno-13", resourceId: "julieta-ramos", serviceId: "kapping", start: "2026-09-08T15:00:00", status: "confirmed" },
+  { customerId: "juliana-ferreyra", end: "2026-09-08T18:00:00", id: "turno-06", resourceId: "julieta-ramos", serviceId: "nail-art", start: "2026-09-08T17:00:00", status: "confirmed" },
+  { customerId: "camila-ruiz", end: "2026-09-08T10:30:00", id: "turno-14", resourceId: "agustina-perez", serviceId: "corte-brushing", start: "2026-09-08T09:30:00", status: "completed" },
+  { customerId: "emilia-rojas", end: "2026-09-08T13:30:00", id: "turno-07", resourceId: "agustina-perez", serviceId: "color-completo", start: "2026-09-08T12:00:00", status: "in_progress" },
+  { customerId: "valentina-diaz", end: "2026-09-08T17:00:00", id: "turno-08", resourceId: "agustina-perez", serviceId: "color-completo", start: "2026-09-08T15:30:00", status: "confirmed" },
+  { customerId: "sofia-martinez", end: "2026-09-08T19:00:00", id: "turno-09", resourceId: "agustina-perez", serviceId: "corte-brushing", start: "2026-09-08T18:00:00", status: "cancelled" },
 ] as const satisfies readonly BeautyAppointment[];
+
+export const beautyBookingScenario = defineBookingScenario({
+  bookings: beautyAppointments,
+  customers: beautyClients,
+  id: "beauty-aura-2026-09-08",
+  resources: beautyProfessionals,
+  schedule: {
+    date: "2026-09-08",
+    endTime: "19:00",
+    resourceIds: beautyProfessionals.map((professional) => professional.id),
+    slotMinutes: 30,
+    startTime: "09:00",
+  },
+  services: beautyServices,
+});
 
 export const beautyDashboard = {
   kpis: [
@@ -162,6 +168,7 @@ export const beautyReports = {
 
 export const beautyMockDataset = defineMockScenario({
   appointments: beautyAppointments,
+  bookingScenario: beautyBookingScenario,
   clients: beautyClients,
   dashboard: beautyDashboard,
   professionals: beautyProfessionals,

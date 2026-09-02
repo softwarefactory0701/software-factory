@@ -1,5 +1,7 @@
 # Booking Core
 
-Base reutilizable para experiencias visuales de turnos y reservas.
+Motor neutral para experiencias visuales de reservas en demos de Software Factory.
 
-En SF-001A solo define contratos de presentación neutrales. No incluye persistencia, reglas de disponibilidad, integraciones, notificaciones ni lógica de producción. Beauty, Taller y Consultorio adaptarán estos contratos mediante configuración de vertical en fases posteriores.
+Booking Core v1 incluye contratos, escenarios deterministas, composición diaria por recursos, selección/detalle y estado local reseteable. No contiene terminología ni branding de una industria.
+
+No incluye persistencia, disponibilidad, prevención de superposiciones, autenticación, pagos, notificaciones, integraciones ni reglas productivas. Consulta `docs/02-products/booking-core.md` para sus límites y uso actual.

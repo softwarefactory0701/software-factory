@@ -51,7 +51,7 @@ pnpm build
 - `apps/demos`: catálogo y futuro host de demos.
 - `packages/ui`: primitivas visuales sin dominio.
 - `packages/demo-shell`: navegación y marco visual común.
-- `packages/booking-core`: contratos reutilizables de reservas.
+- `packages/booking-core`: contratos, estado demo y agenda diaria reutilizable.
 - `packages/stock-core` y `packages/crm-core`: placeholders no funcionales.
 - `packages/mock-data`: utilidades para datos explícitamente ficticios.
 - `packages/verticals`: contrato común y espacio de cada industria.

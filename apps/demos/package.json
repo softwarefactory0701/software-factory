@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@software-factory/booking-core": "workspace:*",
     "@software-factory/demo-shell": "workspace:*",
     "@software-factory/mock-data": "workspace:*",
     "@software-factory/ui": "workspace:*",

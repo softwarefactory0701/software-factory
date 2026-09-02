@@ -109,4 +109,4 @@ Estas posibilidades no forman parte de la demo actual y requerirían un proyecto
 - Contratos neutrales de estados de Booking Core.
 - Contrato de vertical con términos plurales, metadata y tema.
 
-La composición profunda de la agenda todavía es específica de Beauty. SF-001C determinará qué partes merecen convertirse en Booking Core reusable para Taller y Consultorio.
+Booking Core v1 comparte la escala horaria, columnas por recurso, cards seleccionables, drawer y estado demo. Beauty conserva su resumen semanal, modal comercial, terminología, metadata y presentación visual.

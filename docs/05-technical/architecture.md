@@ -75,7 +75,7 @@ Las tablas, charts y modales se incorporarán como componentes o slots cuando un
 
 ### booking-core
 
-Define los contratos neutrales `Booking`, `Resource`, `Customer`, `Service`, estados y etiquetas. No implementa disponibilidad, calendario, persistencia, mutaciones ni reglas operativas.
+Define contratos neutrales, escenarios deterministas, estado local reseteable y la composición visual diaria de reservas. No implementa disponibilidad, persistencia ni reglas operativas.
 
 ### stock-core y crm-core
 
@@ -118,4 +118,12 @@ Beauty se ensambla en `apps/demos/app/beauty` y consume dos entradas explícitas
 
 Los primitives `StatCard`, `StatusBadge`, `SectionHeader`, `ProgressBar` y tabla se extrajeron a `ui` después de aparecer en más de una pantalla. Los paneles, avatares, iconografía y composición de agenda permanecen dentro de Beauty porque todavía expresan decisiones específicas del vertical.
 
-Booking Core únicamente amplió su unión de estados visuales. La agenda de Beauty no se promueve todavía al core: esa reconciliación corresponde a SF-001C.
+## Booking Core v1 — SF-001C
+
+Booking Core incorpora contratos neutrales, un `BookingScenario` determinista, helpers de composición, un reducer de estado demo y tres componentes de agenda ya validados por Beauty. La dependencia permitida sigue el sentido `booking-core → ui`.
+
+Los datos Beauty adaptan sus entidades a `BookingScenario` desde `mock-data/beauty`; Booking Core nunca importa Beauty ni `verticals`. Para consumidores no visuales se exponen subpaths `@software-factory/booking-core/types` y `@software-factory/booking-core/scenario`, evitando cargar exports React en paquetes de datos.
+
+El estado se mantiene en memoria mediante reducer. Su snapshot inicial permite `Reset demo` sin almacenamiento local ni infraestructura. Las mutaciones son de presentación y no expresan reglas de dominio productivas.
+
+La vista diaria y el drawer se comparten. Beauty conserva la vista semanal, el modal comercial de creación, labels, metadata enriquecida y presentación de estados. Esta frontera deberá validarse con un segundo vertical antes de extraer más composición.
