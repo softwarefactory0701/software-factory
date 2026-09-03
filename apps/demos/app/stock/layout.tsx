@@ -1,0 +1,1 @@
+import type { ReactNode } from "react";import { PulseShell } from "./_components/pulse-shell";export default function Layout({children}:{readonly children:ReactNode}){return <PulseShell>{children}</PulseShell>}

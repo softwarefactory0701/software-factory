@@ -7,7 +7,9 @@
     ".": "./src/index.ts",
     "./beauty": "./beauty/index.ts",
     "./taller": "./taller/index.ts",
-    "./consultorio": "./consultorio/index.ts"
+    "./consultorio": "./consultorio/index.ts",
+    "./stock": "./stock/index.ts",
+    "./autoparts": "./autoparts/index.ts"
   },
   "scripts": {
     "build": "tsc --noEmit",

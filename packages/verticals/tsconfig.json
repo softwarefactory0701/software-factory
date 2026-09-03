@@ -1,5 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": { "noEmit": true },
-  "include": ["src/**/*.ts", "beauty/**/*.ts", "taller/**/*.ts", "consultorio/**/*.ts"]
+  "include": ["src/**/*.ts", "beauty/**/*.ts", "taller/**/*.ts", "consultorio/**/*.ts", "stock/**/*.ts", "autoparts/**/*.ts"]
 }

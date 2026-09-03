@@ -1,0 +1,1 @@
+import type{ReactNode}from"react";import{PartxShell}from"./_components/partx-shell";export default function Layout({children}:{readonly children:ReactNode}){return <PartxShell>{children}</PartxShell>}

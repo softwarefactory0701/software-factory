@@ -1,3 +1,3 @@
-# Autoparts
+# PARTX Auto Parts
 
-Placeholder de vertical para una fase futura.
+Configuración del segundo vertical Stock. Los conceptos automotrices permanecen fuera de Stock Core.

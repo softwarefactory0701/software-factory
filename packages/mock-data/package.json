@@ -8,15 +8,18 @@
     "./beauty": "./beauty/index.ts",
     "./taller": "./taller/index.ts",
     "./consultorio": "./consultorio/index.ts"
+    ,"./stock": "./stock/index.ts",
+    "./autoparts": "./autoparts/index.ts"
   },
   "scripts": {
     "build": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0",
-    "test": "tsx --test taller/taller.test.ts consultorio/consultorio.test.ts",
+    "test": "tsx --test taller/taller.test.ts consultorio/consultorio.test.ts stock/stock.test.ts autoparts/autoparts.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@software-factory/booking-core": "workspace:*"
+    "@software-factory/booking-core": "workspace:*",
+    "@software-factory/stock-core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",

@@ -22,7 +22,7 @@ software-factory/
 │   ├── ui/               # Primitivas visuales
 │   ├── demo-shell/       # Marco común de una demo
 │   ├── booking-core/     # Contratos neutrales de reservas
-│   ├── stock-core/       # Placeholder
+│   ├── stock-core/       # Contratos neutrales mínimos de inventario
 │   ├── crm-core/         # Placeholder
 │   ├── mock-data/        # Contratos para datos ficticios
 │   └── verticals/        # Contrato y carpetas por vertical
@@ -79,7 +79,7 @@ Define contratos neutrales, escenarios deterministas, estado local reseteable y 
 
 ### stock-core y crm-core
 
-Paquetes placeholder compilables. No exponen aún modelos funcionales. Crear sus APIs antes de tener casos de uso reales sería sobrearquitectura.
+`stock-core` expone desde SF-004A únicamente contratos neutrales de productos, categorías, ubicaciones, cantidades, umbrales y movimientos. No incluye UI, estado ni lógica productiva. `crm-core` continúa como placeholder compilable. Las APIs se amplían solo después de validarlas en experiencias reales.
 
 ### mock-data
 

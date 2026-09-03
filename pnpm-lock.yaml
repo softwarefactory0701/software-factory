@@ -32,6 +32,9 @@ importers:
       '@software-factory/mock-data':
         specifier: workspace:*
         version: link:../../packages/mock-data
+      '@software-factory/stock-core':
+        specifier: workspace:*
+        version: link:../../packages/stock-core
       '@software-factory/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -150,6 +153,9 @@ importers:
       '@software-factory/booking-core':
         specifier: workspace:*
         version: link:../booking-core
+      '@software-factory/stock-core':
+        specifier: workspace:*
+        version: link:../stock-core
     devDependencies:
       '@types/node':
         specifier: ^24.10.0
@@ -163,6 +169,12 @@ importers:
 
   packages/stock-core:
     devDependencies:
+      '@types/node':
+        specifier: ^24.10.0
+        version: 24.13.3
+      tsx:
+        specifier: ^4.21.0
+        version: 4.23.13
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
