@@ -2,7 +2,7 @@ import { defineVertical } from "../src/types";
 
 export const consultorioVertical = defineVertical({
   businessName: "NEXUS Consultorios",
-  configuration: { currency: "ARS", locale: "es-AR", scheduleEndHour: 19, scheduleStartHour: 8, weekStartsOn: "monday" },
+  configuration: { currency: "ARS", locale: "es-AR", weekStartsOn: "monday" },
   demo: {
     disclaimer: "Datos ficticios · Acciones simuladas",
     internalName: "Consultorio",

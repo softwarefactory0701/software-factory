@@ -49,3 +49,66 @@ export interface StockMovement {
   readonly actorName?: string;
   readonly note?: string;
 }
+
+export interface StockDemoScenario {
+  readonly products: readonly Product[];
+  readonly categories: readonly Category[];
+  readonly locations: readonly Location[];
+  readonly stockLevels: readonly StockLevel[];
+  readonly thresholds: readonly LowStockThreshold[];
+  readonly movements: readonly StockMovement[];
+  readonly demoTimestamp?: string;
+}
+
+export interface StockDemoFilters {
+  readonly search: string;
+  readonly stockStatus: "all" | "ok" | "low" | "out";
+  readonly movementType: "all" | MovementType;
+}
+
+export interface StockDemoSnapshot {
+  readonly stockLevels: readonly StockLevel[];
+  readonly movements: readonly StockMovement[];
+}
+
+export interface StockDemoState extends StockDemoScenario {
+  readonly selectedProductId?: string;
+  readonly filters: StockDemoFilters;
+  readonly initialSnapshot: StockDemoSnapshot;
+}
+
+export type StockAlertSeverity = "critical" | "warning";
+
+export interface StockAlert {
+  readonly productId: string;
+  readonly locationId?: string;
+  readonly status: "low" | "out";
+  readonly current: number;
+  readonly threshold: number;
+  readonly severity: StockAlertSeverity;
+  readonly scope: "global" | "location";
+}
+
+export interface StockMovementCommand {
+  readonly productId: string;
+  readonly type: MovementType;
+  readonly quantity: number;
+  readonly adjustmentDirection?: AdjustmentDirection;
+  readonly sourceLocationId?: string;
+  readonly destinationLocationId?: string;
+  readonly occurredAt?: string;
+  readonly reference?: string;
+  readonly actorName?: string;
+  readonly note?: string;
+}
+
+export type StockOperationError =
+  | "invalid-quantity"
+  | "invalid-product"
+  | "location-required"
+  | "same-location"
+  | "insufficient-stock";
+
+export type StockOperationResult =
+  | { readonly ok: true; readonly stockLevels: readonly StockLevel[]; readonly movement: StockMovement }
+  | { readonly ok: false; readonly error: StockOperationError };

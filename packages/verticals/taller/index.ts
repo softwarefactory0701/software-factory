@@ -2,7 +2,7 @@ import { defineVertical } from "../src/types";
 
 export const tallerVertical = defineVertical({
   businessName: "TORQUE Garage",
-  configuration: { currency: "ARS", locale: "es-AR", scheduleEndHour: 19, scheduleStartHour: 8, weekStartsOn: "monday" },
+  configuration: { currency: "ARS", locale: "es-AR", weekStartsOn: "monday" },
   demo: {
     disclaimer: "Datos ficticios · Acciones simuladas",
     internalName: "Taller",

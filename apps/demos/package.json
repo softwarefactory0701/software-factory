@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@software-factory/booking-core": "workspace:*",
+    "@software-factory/crm-core": "workspace:*",
+    "@software-factory/crm-ui": "workspace:*",
     "@software-factory/demo-shell": "workspace:*",
     "@software-factory/mock-data": "workspace:*",
     "@software-factory/stock-core": "workspace:*",

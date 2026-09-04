@@ -6,3 +6,5 @@ export type {
   VerticalTerminology,
   VerticalTheme,
 } from "./types";
+export { defineStockVertical } from "./stock";
+export type { StockTerminology, StockVerticalConfig } from "./stock";

@@ -1,0 +1,1 @@
+import type{ReactNode}from"react";import{NovaShell}from"./_components/nova-shell";import"./nova.css";export default function Layout({children}:{readonly children:ReactNode}){return <NovaShell><div className="nova-app">{children}</div></NovaShell>}

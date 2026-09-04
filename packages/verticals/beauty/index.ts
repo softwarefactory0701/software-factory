@@ -5,8 +5,6 @@ export const beautyVertical = defineVertical({
   configuration: {
     currency: "ARS",
     locale: "es-AR",
-    scheduleEndHour: 19,
-    scheduleStartHour: 9,
     weekStartsOn: "monday",
   },
   demo: {

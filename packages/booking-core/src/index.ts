@@ -1,5 +1,6 @@
 export type {
   Booking,
+  BookingDraft,
   BookingDetail,
   BookingScenario,
   BookingStatus,
@@ -20,6 +21,15 @@ export type { BookingViewToolbarLabels, BookingViewToolbarProps } from "./bookin
 export { bookingDemoReducer, createBookingDemoState, useBookingDemoState } from "./demo-state";
 export type { BookingDemoAction, BookingDemoState } from "./demo-state";
 export type { BookingStatusMap, BookingStatusPresentation } from "./presentation";
+export { addMinutes, createBookingFromDraft } from "./application";
+export type { BookingCreationDefaults } from "./application";
+export { useBookingDemo } from "./foundation";
+export type { BookingFeedbackMessages, UseBookingDemoOptions } from "./foundation";
+export type { BookingPresentationAdapter, BookingVerticalConfig } from "./configuration";
+export { BookingCreationForm } from "./booking-creation-form";
+export type { BookingCreationFormClassNames, BookingCreationFormLabels, BookingCreationFormProps } from "./booking-creation-form";
+export { BookingWeekSummary } from "./booking-week-summary";
+export type { BookingWeekSummaryItem, BookingWeekSummaryProps } from "./booking-week-summary";
 export {
   bookingTime,
   createTimeSlots,

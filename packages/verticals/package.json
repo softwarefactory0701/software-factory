@@ -9,7 +9,10 @@
     "./taller": "./taller/index.ts",
     "./consultorio": "./consultorio/index.ts",
     "./stock": "./stock/index.ts",
-    "./autoparts": "./autoparts/index.ts"
+    "./autoparts": "./autoparts/index.ts",
+    "./inmobiliaria": "./inmobiliaria/index.ts",
+    "./sales": "./sales/index.ts",
+    "./insurance": "./insurance/index.ts"
   },
   "scripts": {
     "build": "tsc --noEmit",

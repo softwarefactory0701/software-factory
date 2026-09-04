@@ -59,6 +59,12 @@ Los tipos son `inbound`, `outbound`, `adjustment` y `transfer`. Una transferenci
 - Un ajuste requiere ubicación y `adjustmentDirection`; su signo visual depende de esa dirección.
 - Estas reglas están documentadas, pero SF-004A no introduce validadores ni errores de dominio.
 
+## Stock Application Foundation
+
+SF-010B.1 agregó `StockDemoScenario`, estado/reducer determinista, operaciones puras, política de stock no negativo, alertas globales y por ubicación, product view neutral, selección, filtros, feedback y reset mediante `useStockDemo`.
+
+Las operaciones puras permanecen separadas de React. PULSE y PARTX comparten el provider; compatibilidad automotriz y proveedores continúan fuera del Core. Ver `stock-application-foundation.md`.
+
 ## Elementos fuera de v1
 
 - `Warehouse`: `Location` cubre la necesidad inicial.

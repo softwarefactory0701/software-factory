@@ -1,36 +1,219 @@
 "use client";
-
-import { BookingDaySchedule, BookingDetailDrawer, BookingViewToolbar, getBookingDetailFromBookings, useBookingDemoState, type Booking, type BookingStatusMap, type Customer, type Resource } from "@software-factory/booking-core";
-import { nexusBookingScenario, nexusPatients, nexusProfessionals, nexusServices } from "@software-factory/mock-data/consultorio";
+import {
+  BookingCreationForm,
+  BookingDaySchedule,
+  BookingDetailDrawer,
+  BookingViewToolbar,
+  BookingWeekSummary,
+  useBookingDemo,
+  type BookingPresentationAdapter,
+  type BookingStatusMap,
+  type BookingVerticalConfig,
+} from "@software-factory/booking-core";
+import {
+  nexusBookingScenario,
+  nexusPatients,
+  nexusProfessionals,
+  nexusServices,
+} from "@software-factory/mock-data/consultorio";
 import { consultorioVertical } from "@software-factory/verticals/consultorio";
 import { useState } from "react";
-import { NexusPanel, formatNexusCurrency } from "../_components/nexus-primitives";
-
+import {
+  NexusPanel,
+  formatNexusCurrency,
+} from "../_components/nexus-primitives";
 const statusPresentation: BookingStatusMap = {
-  cancelled: { cardClassName: "border-stone-200 bg-stone-100", label: "Cancelado", tone: "neutral" },
-  completed: { cardClassName: "border-[#dce5e1] bg-[#f1f5f3]", label: "Finalizado", tone: "success" },
-  confirmed: { cardClassName: "border-[#b9d8ce] bg-[#eaf4f0]", label: "Confirmado", tone: "success" },
-  in_progress: { cardClassName: "border-[#9fc7c5] bg-[#e7f2f3]", label: "En consulta", tone: "info" },
-  pending: { cardClassName: "border-[#e4d8ad] bg-[#faf6e9]", label: "En espera", tone: "warning" },
+  cancelled: {
+    cardClassName: "border-stone-200 bg-stone-100",
+    label: "Cancelado",
+    tone: "neutral",
+  },
+  completed: {
+    cardClassName: "border-[#dce5e1] bg-[#f1f5f3]",
+    label: "Finalizado",
+    tone: "success",
+  },
+  confirmed: {
+    cardClassName: "border-[#b9d8ce] bg-[#eaf4f0]",
+    label: "Confirmado",
+    tone: "success",
+  },
+  in_progress: {
+    cardClassName: "border-[#9fc7c5] bg-[#e7f2f3]",
+    label: "En consulta",
+    tone: "info",
+  },
+  pending: {
+    cardClassName: "border-[#e4d8ad] bg-[#faf6e9]",
+    label: "En espera",
+    tone: "warning",
+  },
 };
-
-function professionalAvatar(resource: Resource){const item=nexusProfessionals.find(professional=>professional.id===resource.id);return <span className="grid size-9 shrink-0 place-items-center rounded-2xl bg-[#345c58] text-[10px] font-semibold text-white">{item?.avatar??"NX"}</span>}
-function patientAvatar(customer: Customer){return <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#dcebe5] text-[10px] font-semibold text-[#285f59]">{customer.name.split(" ").map(word=>word[0]).slice(0,2).join("")}</span>}
-function addMinutes(time:string,minutes:number){const[hours=0,mins=0]=time.split(":").map(Number);const total=hours*60+mins+minutes;return `${String(Math.floor(total/60)).padStart(2,"0")}:${String(total%60).padStart(2,"0")}`}
-
-export function NexusAgendaExperience(){
-  const {state,closeDetail,createBooking,resetDemo,selectBooking,setView,updateBookingStatus}=useBookingDemoState(nexusBookingScenario);
-  const[feedback,setFeedback]=useState<string|null>(null);const[modalOpen,setModalOpen]=useState(false);
-  const[patientId,setPatientId]=useState<string>(nexusPatients[0].id);const[professionalId,setProfessionalId]=useState<string>(nexusProfessionals[0].id);const[serviceId,setServiceId]=useState<string>(nexusServices[0].id);const[time,setTime]=useState("17:30");
-  const selectedDetail=state.selectedBookingId?getBookingDetailFromBookings(nexusBookingScenario,state.bookings,state.selectedBookingId):undefined;
-  const selectedPatient=selectedDetail?nexusPatients.find(item=>item.id===selectedDetail.customer.id):undefined;
-  function showFeedback(message:string){setFeedback(message);window.setTimeout(()=>setFeedback(null),2400)}
-  function createDemoBooking(){const service=nexusServices.find(item=>item.id===serviceId)!;const booking:Booking={customerId:patientId,end:`${nexusBookingScenario.schedule.date}T${addMinutes(time,service.durationMinutes)}:00`,id:"nexus-demo",notes:nexusPatients.find(item=>item.id===patientId)?.note.text,resourceId:professionalId,serviceId,start:`${nexusBookingScenario.schedule.date}T${time}:00`,status:"confirmed"};createBooking(booking);setModalOpen(false);showFeedback("Turno de demostración creado")}
-  function updateSelected(status:"completed"|"cancelled",message:string){if(state.selectedBookingId)updateBookingStatus(state.selectedBookingId,status);closeDetail();showFeedback(message)}
-  return <>
-    <NexusPanel className="overflow-hidden"><BookingViewToolbar labels={{create:"Nuevo turno",day:"Día",reset:"Reset demo",today:"Hoy",week:"Semana"}} onCreate={()=>setModalOpen(true)} onReset={()=>{resetDemo();showFeedback("Demo restaurada al escenario inicial")}} onViewChange={setView} view={state.view}/>{state.view==="week"?<div className="grid gap-3 p-5 sm:grid-cols-3 lg:grid-cols-6">{[14,18,16,19,17,9].map((total,index)=><button className={`rounded-2xl border p-4 text-left ${index===1?"border-[#91bcb0] bg-[#e8f2ef]":"border-[#dbe3df] bg-white"}`} key={index} onClick={()=>setView("day")} type="button"><p className="text-xs font-medium text-[#71817e]">{["Lun 7","Mar 8","Mié 9","Jue 10","Vie 11","Sáb 12"][index]}</p><p className="mt-3 text-3xl font-semibold">{total}</p><p className="text-[10px] text-[#82908d]">turnos</p></button>)}</div>:<BookingDaySchedule bookings={state.bookings} onSelectBooking={selectBooking} renderCustomerAvatar={patientAvatar} renderResourceAvatar={professionalAvatar} resourceNameInBooking={name=>`con ${name}`} scenario={nexusBookingScenario} selectLabel={name=>`Ver turno de ${name}`} showStatusOnCompactBookings statusPresentation={statusPresentation}/>}</NexusPanel>
-    <BookingDetailDrawer customerSecondaryText={selectedPatient?`${selectedPatient.phone} · ${selectedPatient.email}`:undefined} detail={selectedDetail} formatPrice={formatNexusCurrency} labels={{cancel:"Cancelar turno",close:"Cerrar detalle",complete:"Marcar finalizado",disclaimer:"Acciones administrativas simuladas · No se guardan cambios",edit:"Editar turno",eyebrow:"Detalle administrativo · Demo",notes:"Nota administrativa",price:"Precio base",status:"Estado",time:"Horario"}} notes={selectedPatient?.note.text??selectedDetail?.booking.notes} onCancel={()=>updateSelected("cancelled","Turno cancelado en la demo")} onClose={closeDetail} onComplete={()=>updateSelected("completed","Consulta marcada como finalizada")} onEdit={()=>{closeDetail();showFeedback("Edición simulada")}} renderCustomerAvatar={patientAvatar} statusPresentation={statusPresentation} terminology={consultorioVertical.terminology}/>
-    {feedback?<div className="fixed bottom-24 right-4 z-60 rounded-2xl bg-[#263836] px-4 py-3 text-sm font-semibold text-white shadow-xl lg:bottom-6">{feedback}</div>:null}
-    {modalOpen?<div aria-labelledby="new-nexus-booking" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center bg-[#1f302e]/45 p-4 backdrop-blur-sm" role="dialog"><div className="w-full max-w-lg rounded-3xl bg-[#fffefb] p-5 shadow-2xl sm:p-7"><div className="flex items-start justify-between"><div><p className="text-xs font-semibold uppercase tracking-[.18em] text-[#347b78]">Acción simulada</p><h2 className="mt-2 text-2xl font-semibold" id="new-nexus-booking">Nuevo turno</h2><p className="mt-1 text-sm text-[#71817e]">Gestión exclusivamente administrativa.</p></div><button aria-label="Cerrar" className="grid size-9 place-items-center rounded-full bg-[#edf2ef]" onClick={()=>setModalOpen(false)} type="button">×</button></div><div className="mt-6 grid gap-4 sm:grid-cols-2"><label className="text-xs font-semibold text-[#526663]">Paciente<select className="mt-2 w-full rounded-2xl border border-[#dbe3df] bg-white p-3 font-normal" onChange={event=>setPatientId(event.target.value)} value={patientId}>{nexusPatients.map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</select></label><label className="text-xs font-semibold text-[#526663]">Profesional<select className="mt-2 w-full rounded-2xl border border-[#dbe3df] bg-white p-3 font-normal" onChange={event=>setProfessionalId(event.target.value)} value={professionalId}>{nexusProfessionals.map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</select></label><label className="text-xs font-semibold text-[#526663] sm:col-span-2">Tipo de consulta<select className="mt-2 w-full rounded-2xl border border-[#dbe3df] bg-white p-3 font-normal" onChange={event=>setServiceId(event.target.value)} value={serviceId}>{nexusServices.map(item=><option key={item.id} value={item.id}>{item.name} · {item.durationMinutes} min</option>)}</select></label><label className="text-xs font-semibold text-[#526663]">Fecha<input className="mt-2 w-full rounded-2xl border border-[#dbe3df] bg-white p-3 font-normal" readOnly type="date" value={nexusBookingScenario.schedule.date}/></label><label className="text-xs font-semibold text-[#526663]">Hora<input className="mt-2 w-full rounded-2xl border border-[#dbe3df] bg-white p-3 font-normal" onChange={event=>setTime(event.target.value)} type="time" value={time}/></label></div><div className="mt-7 flex justify-end gap-3"><button className="px-4 py-2 text-sm font-semibold text-[#71817e]" onClick={()=>setModalOpen(false)} type="button">Cancelar</button><button className="rounded-2xl bg-[#263836] px-5 py-2.5 text-sm font-semibold text-white" onClick={createDemoBooking} type="button">Crear turno demo</button></div></div></div>:null}
-  </>
+const config: BookingVerticalConfig = {
+  creationDefaults: { initialStatus: "confirmed" },
+  schedule: nexusBookingScenario.schedule,
+  statusPresentation,
+  terminology: consultorioVertical.terminology,
+};
+const adapter: BookingPresentationAdapter = {
+  customerSecondaryText: (d) => {
+    const p = nexusPatients.find((x) => x.id === d.customer.id);
+    return p ? `${p.phone} · ${p.email}` : undefined;
+  },
+  notes: (d) =>
+    nexusPatients.find((x) => x.id === d.customer.id)?.note.text ??
+    d.booking.notes,
+  renderCustomerAvatar: (c) => (
+    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#dcebe5] text-[10px] font-semibold text-[#285f59]">
+      {c.name
+        .split(" ")
+        .map((x) => x[0])
+        .slice(0, 2)
+        .join("")}
+    </span>
+  ),
+  renderResourceAvatar: (r) => (
+    <span className="grid size-9 shrink-0 place-items-center rounded-2xl bg-[#345c58] text-[10px] font-semibold text-white">
+      {nexusProfessionals.find((x) => x.id === r.id)?.avatar ?? "NX"}
+    </span>
+  ),
+};
+const week = [14, 18, 16, 19, 17, 9].map((count, i) => ({
+  active: i === 1,
+  count,
+  id: `nexus-week-${i}`,
+  label: ["Lun 7", "Mar 8", "Mié 9", "Jue 10", "Vie 11", "Sáb 12"][i]!,
+}));
+export function NexusAgendaExperience() {
+  const [open, setOpen] = useState(false);
+  const crm = useBookingDemo({
+    creationDefaults: config.creationDefaults,
+    feedbackMessages: {
+      cancelled: "Turno cancelado en la demo",
+      completed: "Consulta marcada como finalizada",
+      created: "Turno de demostración creado",
+      reset: "Demo restaurada al escenario inicial",
+    },
+    scenario: nexusBookingScenario,
+  });
+  return (
+    <>
+      <NexusPanel className="overflow-hidden">
+        <BookingViewToolbar
+          labels={{
+            create: "Nuevo turno",
+            day: "Día",
+            reset: "Reset demo",
+            today: "Hoy",
+            week: "Semana",
+          }}
+          onCreate={() => setOpen(true)}
+          onReset={crm.reset}
+          onViewChange={crm.setView}
+          view={crm.state.view}
+        />
+        {crm.state.view === "week" ? (
+          <BookingWeekSummary
+            activeClassName="border-[#91bcb0] bg-[#e8f2ef]"
+            cardClassName="rounded-2xl border border-[#dbe3df] bg-white p-4 text-left"
+            items={week}
+            onSelectDay={() => crm.setView("day")}
+            renderCountLabel={() => (
+              <p className="text-[10px] text-[#82908d]">turnos</p>
+            )}
+          />
+        ) : (
+          <BookingDaySchedule
+            bookings={crm.bookings}
+            onSelectBooking={crm.selectBooking}
+            renderCustomerAvatar={adapter.renderCustomerAvatar}
+            renderResourceAvatar={adapter.renderResourceAvatar}
+            resourceNameInBooking={(name) => `con ${name}`}
+            scenario={nexusBookingScenario}
+            selectLabel={(name) => `Ver turno de ${name}`}
+            showStatusOnCompactBookings
+            statusPresentation={statusPresentation}
+          />
+        )}
+      </NexusPanel>
+      <BookingDetailDrawer
+        customerSecondaryText={
+          crm.selectedDetail
+            ? adapter.customerSecondaryText?.(crm.selectedDetail)
+            : undefined
+        }
+        detail={crm.selectedDetail}
+        formatPrice={formatNexusCurrency}
+        labels={{
+          cancel: "Cancelar turno",
+          close: "Cerrar detalle",
+          complete: "Marcar finalizado",
+          disclaimer:
+            "Acciones administrativas simuladas · No se guardan cambios",
+          edit: "Editar turno",
+          eyebrow: "Detalle administrativo · Demo",
+          notes: "Nota administrativa",
+          price: "Precio base",
+          status: "Estado",
+          time: "Horario",
+        }}
+        notes={
+          crm.selectedDetail ? adapter.notes?.(crm.selectedDetail) : undefined
+        }
+        onCancel={crm.cancelSelected}
+        onClose={crm.closeDetail}
+        onComplete={crm.completeSelected}
+        onEdit={() => {
+          crm.closeDetail();
+          crm.setFeedback("Edición simulada");
+        }}
+        renderCustomerAvatar={adapter.renderCustomerAvatar}
+        statusPresentation={statusPresentation}
+        terminology={consultorioVertical.terminology}
+      />
+      {crm.feedback ? (
+        <div className="fixed bottom-24 right-4 z-60 rounded-2xl bg-[#263836] px-4 py-3 text-sm font-semibold text-white shadow-xl lg:bottom-6">
+          {crm.feedback}
+        </div>
+      ) : null}
+      {open ? (
+        <BookingCreationForm
+          classNames={{
+            dialog: "bg-[#fffefb]",
+            accentText: "text-[#347b78]",
+            createButton: "rounded-2xl bg-[#263836]",
+            input:
+              "mt-2 w-full rounded-2xl border border-[#dbe3df] bg-white p-3 font-normal",
+                label: "text-xs font-semibold text-[#526663]",
+                title: "text-2xl",
+          }}
+          defaultCustomerId={nexusPatients[0]!.id}
+          defaultResourceId={nexusProfessionals[0]!.id}
+          defaultServiceId={nexusServices[0]!.id}
+          defaultTime="17:30"
+          labels={{
+            cancel: "Cancelar",
+            create: "Crear turno demo",
+            customer: "Paciente",
+            date: "Fecha",
+            description: "Gestión exclusivamente administrativa.",
+            eyebrow: "Acción simulada",
+            resource: "Profesional",
+            service: "Tipo de consulta",
+            time: "Hora",
+            title: "Nuevo turno",
+          }}
+          onCancel={() => setOpen(false)}
+          onCreate={(draft) =>
+            crm.createBookingFromDraft({
+              ...draft,
+              notes: nexusPatients.find((x) => x.id === draft.customerId)?.note
+                .text,
+            })
+          }
+          scenario={nexusBookingScenario}
+        />
+      ) : null}
+    </>
+  );
 }

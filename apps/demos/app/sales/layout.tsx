@@ -1,0 +1,1 @@
+import type{ReactNode}from"react";import{VantageShell}from"./_components/vantage";export default function Layout({children}:{readonly children:ReactNode}){return <VantageShell>{children}</VantageShell>}

@@ -64,8 +64,10 @@ La vertical es responsable de:
 - `BookingViewToolbar`: selector día/semana, creación simulada y reset.
 - `BookingDaySchedule`: escala horaria, columnas por recurso, cards y selección responsive.
 - `BookingDetailDrawer`: estructura accesible del detalle y acciones simuladas.
+- `BookingCreationForm`: formulario neutral de creación desde draft.
+- `BookingWeekSummary`: resumen semanal visual y no productivo.
 
-La vista semanal concreta no forma parte del Core v1. Beauty conserva su resumen porque todavía no existe un segundo caso que valide una composición compartida.
+La coordinación reusable se documenta en `booking-application-foundation.md`.
 
 ## Estado de demo
 
@@ -78,6 +80,8 @@ La vista semanal concreta no forma parte del Core v1. Beauty conserva su resumen
 - restaurar el escenario inicial con `Reset demo`.
 
 No usa `localStorage`. Recargar la página o ejecutar reset restaura el dataset determinista.
+
+`useBookingDemo` compone ese reducer con detalle seleccionado, creación desde `BookingDraft`, acciones completar/cancelar y feedback temporal local. `BookingScenario.schedule` es la única fuente operativa del horario.
 
 ## Cómo Beauty lo consume
 

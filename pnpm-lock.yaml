@@ -26,6 +26,12 @@ importers:
       '@software-factory/booking-core':
         specifier: workspace:*
         version: link:../../packages/booking-core
+      '@software-factory/crm-core':
+        specifier: workspace:*
+        version: link:../../packages/crm-core
+      '@software-factory/crm-ui':
+        specifier: workspace:*
+        version: link:../../packages/crm-ui
       '@software-factory/demo-shell':
         specifier: workspace:*
         version: link:../../packages/demo-shell
@@ -128,6 +134,28 @@ importers:
 
   packages/crm-core:
     devDependencies:
+      '@types/node':
+        specifier: ^24.10.0
+        version: 24.13.3
+      tsx:
+        specifier: ^4.21.0
+        version: 4.23.13
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  packages/crm-ui:
+    dependencies:
+      '@software-factory/crm-core':
+        specifier: workspace:*
+        version: link:../crm-core
+      react:
+        specifier: 19.2.8
+        version: 19.2.8
+    devDependencies:
+      '@types/react':
+        specifier: ^19.2.2
+        version: 19.2.18
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -153,6 +181,12 @@ importers:
       '@software-factory/booking-core':
         specifier: workspace:*
         version: link:../booking-core
+      '@software-factory/crm-core':
+        specifier: workspace:*
+        version: link:../crm-core
+      '@software-factory/crm-ui':
+        specifier: workspace:*
+        version: link:../crm-ui
       '@software-factory/stock-core':
         specifier: workspace:*
         version: link:../stock-core
@@ -172,6 +206,12 @@ importers:
       '@types/node':
         specifier: ^24.10.0
         version: 24.13.3
+      '@types/react':
+        specifier: ^19.2.2
+        version: 19.2.18
+      react:
+        specifier: 19.2.8
+        version: 19.2.8
       tsx:
         specifier: ^4.21.0
         version: 4.23.13

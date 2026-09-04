@@ -27,11 +27,22 @@ export interface Booking {
   readonly customerId: string;
   readonly end: string;
   readonly id: string;
+  readonly metadata?: EntityMetadata;
   readonly notes?: string;
   readonly resourceId: string;
   readonly serviceId: string;
   readonly start: string;
   readonly status: BookingStatus;
+}
+
+export interface BookingDraft {
+  readonly customerId: string;
+  readonly date: string;
+  readonly metadata?: EntityMetadata;
+  readonly notes?: string;
+  readonly resourceId: string;
+  readonly serviceId: string;
+  readonly startTime: string;
 }
 
 export interface BookingTerminology {

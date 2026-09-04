@@ -9,17 +9,22 @@
     "./taller": "./taller/index.ts",
     "./consultorio": "./consultorio/index.ts"
     ,"./stock": "./stock/index.ts",
-    "./autoparts": "./autoparts/index.ts"
+    "./autoparts": "./autoparts/index.ts",
+    "./inmobiliaria": "./inmobiliaria/index.ts",
+    "./sales": "./sales/index.ts",
+    "./insurance": "./insurance/index.ts"
   },
   "scripts": {
     "build": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0",
-    "test": "tsx --test taller/taller.test.ts consultorio/consultorio.test.ts stock/stock.test.ts autoparts/autoparts.test.ts",
+    "test": "tsx --test taller/taller.test.ts consultorio/consultorio.test.ts stock/stock.test.ts autoparts/autoparts.test.ts inmobiliaria/inmobiliaria.test.ts sales/sales.test.ts insurance/insurance.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@software-factory/booking-core": "workspace:*",
-    "@software-factory/stock-core": "workspace:*"
+    "@software-factory/stock-core": "workspace:*",
+    "@software-factory/crm-core": "workspace:*",
+    "@software-factory/crm-ui": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",

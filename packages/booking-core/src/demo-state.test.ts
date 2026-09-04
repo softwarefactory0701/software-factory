@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bookingDemoReducer, createBookingDemoState } from "./demo-state";
 import { defineBookingScenario, getBookingDetail } from "./scenario";
+import { addMinutes, createBookingFromDraft } from "./application";
 import type { Booking, BookingScenario } from "./types";
 
 const initialBooking: Booking = {
@@ -24,6 +25,12 @@ const scenario: BookingScenario = defineBookingScenario({
 });
 
 describe("Booking Core demo state", () => {
+  it("adds minutes and creates a booking from a neutral draft", () => {
+    assert.equal(addMinutes("23:30", 45), "24:15");
+    const booking = createBookingFromDraft(scenario, { customerId: "customer-1", date: "2026-09-08", resourceId: "resource-1", serviceId: "service-1", startTime: "10:30" }, { initialStatus: "pending" }, "booking-draft");
+    assert.equal(booking?.end, "2026-09-08T11:30:00");
+    assert.equal(booking?.status, "pending");
+  });
   it("resolves a neutral booking detail from scenario references", () => {
     const detail = getBookingDetail(scenario, "booking-1");
     assert.equal(detail?.customer.name, "Customer One");
