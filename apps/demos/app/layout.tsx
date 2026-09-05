@@ -4,6 +4,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   description: "Catálogo interno de demos comerciales.",
+  robots: {
+    follow: false,
+    index: false,
+  },
   title: "Demos | Software Factory",
 };
 

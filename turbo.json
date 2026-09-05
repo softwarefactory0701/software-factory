@@ -6,6 +6,7 @@
     },
     "@software-factory/website#build": {
       "dependsOn": ["^build"],
+      "env": ["NEXT_PUBLIC_DEMOS_BASE_URL"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "@software-factory/demos#build": {

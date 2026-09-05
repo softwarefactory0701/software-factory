@@ -2,7 +2,7 @@
   "name": "software-factory",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@11.25.0",
+  "packageManager": "pnpm@10.34.5",
   "engines": {
     "node": ">=20.19.0"
   },

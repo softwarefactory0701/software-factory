@@ -1,0 +1,3 @@
+"use client";
+import{motion,useReducedMotion}from"motion/react";
+export function VelarisBackground(){const reduced=useReducedMotion();return <div aria-hidden className="velaris"><motion.div animate={reduced?undefined:{x:["-8%","8%","-8%"],y:["-4%","7%","-4%"],scale:[1,1.08,1]}} className="velaris-blob velaris-blob--blue" transition={{duration:18,ease:"easeInOut",repeat:Infinity}}/><motion.div animate={reduced?undefined:{x:["7%","-10%","7%"],y:["8%","-5%","8%"]}} className="velaris-blob velaris-blob--petrol" transition={{duration:22,ease:"easeInOut",repeat:Infinity}}/><div className="velaris-vignette"/><div className="velaris-grain"/></div>}

@@ -7,7 +7,7 @@ Monorepo para construir demos comerciales navegables de software verticalizado. 
 ## Requisitos
 
 - Node.js 20.19 o superior
-- Corepack habilitado, o pnpm 11.25 instalado
+- Corepack habilitado, o pnpm 10.34.5 instalado
 
 ## Instalación
 
@@ -36,6 +36,14 @@ pnpm dev:demos
 - Website: http://localhost:3000
 - Demos: http://localhost:3001
 - Beauty: http://localhost:3001/beauty
+
+`apps/website/.env.local` debe incluir:
+
+```dotenv
+NEXT_PUBLIC_DEMOS_BASE_URL=http://localhost:3001
+```
+
+Los cambios en `.env.local` requieren reiniciar el servidor de desarrollo de Next.js.
 
 ## Validación
 
